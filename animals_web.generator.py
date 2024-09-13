@@ -1,57 +1,30 @@
 import json
 
 
-def generate_animal_html(animal_data):
+def serialize_animal(animal_data):
     html = '<li class="cards__item">'
 
     name = animal_data.get('name')
     characteristics = animal_data.get('characteristics')
     locations = animal_data.get('locations')
 
-    if name:
-        html += f"Name: {name}<br/>"
-
-    if characteristics:
-        diet = characteristics.get('diet')
-        type_ = characteristics.get('type')
-        if diet:
-            html += f"Diet: {diet}<br/>"
-        if type_:
-            html += f"Type: {type_}<br/>"
-
-    if locations:
-        html += f"Location: {locations[0]}<br/>"
-
-    html += '</li>'
-    return html
-
-
-def generate_animal_html(animal_data):
-    html = '<li class="cards__item">'
-
-    name = animal_data.get('name')
-    characteristics = animal_data.get('characteristics')
-    locations = animal_data.get('locations')
-
-    # Add title
     if name:
         html += f'<div class="card__title">{name}</div>'
 
-    # Add text content
     html += '<p class="card__text">'
 
     if locations:
         html += f'<strong>Location:</strong> {locations[0]}<br/>'
 
     if characteristics:
-        type_ = characteristics.get('type')
         diet = characteristics.get('diet')
-
-        if type_:
-            html += f'<strong>Type:</strong> {type_}<br/>'
+        type_ = characteristics.get('type')
 
         if diet:
             html += f'<strong>Diet:</strong> {diet}<br/>'
+
+        if type_:
+            html += f'<strong>Type:</strong> {type_}<br/>'
 
     html += '</p>'
     html += '</li>'
@@ -66,7 +39,7 @@ def process_animal_data():
     # Generate HTML content for animals
     animal_html = ''
     for animal in data:
-        animal_html += generate_animal_html(animal)
+        animal_html += serialize_animal(animal)
 
     # Read the HTML template file
     with open('animals_template.html', 'r') as f:
