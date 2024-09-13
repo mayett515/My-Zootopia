@@ -26,6 +26,38 @@ def generate_animal_html(animal_data):
     return html
 
 
+def generate_animal_html(animal_data):
+    html = '<li class="cards__item">'
+
+    name = animal_data.get('name')
+    characteristics = animal_data.get('characteristics')
+    locations = animal_data.get('locations')
+
+    # Add title
+    if name:
+        html += f'<div class="card__title">{name}</div>'
+
+    # Add text content
+    html += '<p class="card__text">'
+
+    if locations:
+        html += f'<strong>Location:</strong> {locations[0]}<br/>'
+
+    if characteristics:
+        type_ = characteristics.get('type')
+        diet = characteristics.get('diet')
+
+        if type_:
+            html += f'<strong>Type:</strong> {type_}<br/>'
+
+        if diet:
+            html += f'<strong>Diet:</strong> {diet}<br/>'
+
+    html += '</p>'
+    html += '</li>'
+    return html
+
+
 def process_animal_data():
     # Read the JSON file
     with open('animals_data.json', 'r') as f:
