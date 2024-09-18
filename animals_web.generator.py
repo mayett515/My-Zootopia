@@ -35,7 +35,7 @@ def serialize_animal(animal_data):
 
 
 
-def process_animal_data():
+def process_animal_data(fetch):
     # Read the JSON file
     with open('animals_data.json', 'r') as f:
         data = json.load(f)
@@ -61,12 +61,9 @@ def process_animal_data():
 my_api_key = "G+cGZpp1wLxy0izuFRuNuw==EKjbtSuWSid8Q1nS"
 #response = requests.get(api_url, headers={'X-Api-Key': my_api_key})
 
-def process_animal_data_new():
+def process_animal_data_new(fetched_file):
     # Read the JSON file
-    input_user = input("Enter a name of an animal")
-    api_url = 'https://api.api-ninjas.com/v1/animals?name={}'.format(input_user)
-    response = requests.get(api_url, headers={'X-Api-Key': my_api_key})
-    data = response.json()
+    data = fetched_file
 
     # Generate HTML content for animals
     animal_html = ''
@@ -90,4 +87,6 @@ def process_animal_data_new():
 
 animal_name = input("Please enter an animal: ")
 data = data_fetcher.fetch_data(animal_name)
+process_animal_data_new(data)
+
 
